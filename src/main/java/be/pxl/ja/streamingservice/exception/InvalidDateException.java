@@ -10,4 +10,8 @@ public class InvalidDateException extends RuntimeException {
 	public InvalidDateException(LocalDate incorrectDate, String type, String description) {
 		super(FORMATTER.format(incorrectDate) + " is not a valid " + type + ". " + description);
 	}
+
+    public InvalidDateException() {
+
+    }
 }

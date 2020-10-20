@@ -10,7 +10,7 @@ public class Account {
 	private String password;
 	private PaymentInfo paymentInfo;
 	private StreamingPlan streamingPlan;
-	private List<Profile> profiles = new ArrayList<>();
+	private List<E> profiles = new ArrayList<E>();
 
 	public Account(String email, String password) {
 		this.email = email;
@@ -54,7 +54,7 @@ public class Account {
 		return profiles.size();
 	}
 
-	public List<Profile> getProfiles() {
+	public List<Object> getProfiles() {
 		return profiles;
 	}
 }

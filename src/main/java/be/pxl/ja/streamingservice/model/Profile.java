@@ -3,18 +3,16 @@ package be.pxl.ja.streamingservice.model;
 import be.pxl.ja.streamingservice.exception.InvalidDateException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.time.Period;
 import java.util.List;
 
-public class Profile implements Comparable<Profile> {
-
+public class Profile<T> {
 	private String name;
 	private LocalDate dateOfBirth;
-	private List<Content> recentlyWathed;
-	private List<Content> currentlyWatching;
-	private List<Content> MyList;
 	private String avatar;
+	private List<Content> recentlyWatched;
+	private List<Content> currentlyWatching;
+	private List<Content> myList;
 
 	public Profile(String name, String avatar) {
 		this.name = name;
@@ -22,12 +20,35 @@ public class Profile implements Comparable<Profile> {
 	}
 
 	public Profile(String name) {
-		this.name = name;
-		this.avatar = "profile1";
+		this(name, "profile1");
+	}
+	public void startWatching(Content content){
+		currentlyWatching.remove(content);
+		currentlyWatching.add(0, content);
+	}
+	public void finishWatching(Content content) {
+		currentlyWatching.remove(content);
+		recentlyWatched.add(0, content);
+	}
+	public void addToMyList(Content content){
+		if (!myList.contains(content)){
+			myList.add(0, content);
+		}
+	}
+	public void  removeFromMyList(Content content){
+		myList.remove(content);
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public void setName(String name) {
@@ -38,54 +59,38 @@ public class Profile implements Comparable<Profile> {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		if (dateOfBirth.isAfter(LocalDate.now())) {
-			throw new InvalidDateException(dateOfBirth, "date of birth", "No date of birth in future allowed.");
+	public void setDateOfBirth(LocalDate dateOfBirth) throws InvalidDateException {
+		if (dateOfBirth.isAfter(LocalDate.now())){
+			throw new InvalidDateException();
 		}
+
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	@Override
-	public int compareTo(Profile other) {
-		return name.compareTo(other.getName());
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-
-		Profile profile = (Profile) o;
-
-		return getName() != null ? getName().equals(profile.getName()) : profile.getName() == null;
-	}
-
-	@Override
-	public int hashCode() {
-		return getName() != null ? getName().hashCode() : 0;
-	}
-
-	public int getAge() {
-		if (dateOfBirth == null) {
+	public int getAge(){
+		if (dateOfBirth == null){
 			return 0;
 		}
-		return (int) ChronoUnit.YEARS.between(dateOfBirth, LocalDateTime.now());
+		return Period.between(dateOfBirth, LocalDate.now()).getYears();
 	}
 
-	@Override
-	public String toString() {
-		return "Profile{" +
-				"name='" + name + "\'," +
-				"age=" + getAge() +
-				'}';
+	public List<Content> getRecentlyWatched() {
+		return recentlyWatched;
 	}
 
+	public List<Content> getCurrentlyWatching() {
+		return currentlyWatching;
+	}
 
-	public boolean allowedToWatch(Content content) {
-		return content.getMaturityRating().getMinimumAge() <= getAge();
+	public List<Content> getMyList() {
+		return myList;
+	}
+
+	public boolean allowedToWatch(Content content){
+		return content.getMaturityRating() == null || content.getMaturityRating().getMinimumAge() <= getAge();
+	}
+
+	public boolean isInMyList(Content content) {
+		return myList.contains(content);
 	}
 }

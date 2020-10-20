@@ -1,5 +1,7 @@
 package be.pxl.ja.streamingservice.controller;
 
+import be.pxl.ja.streamingservice.exception.InvalidDateException;
+import be.pxl.ja.streamingservice.model.Profile;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;

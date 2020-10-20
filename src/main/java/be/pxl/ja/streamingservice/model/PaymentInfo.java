@@ -58,4 +58,9 @@ public class PaymentInfo {
 	public void setSecurityCode(int securityCode) {
 		this.securityCode = securityCode;
 	}
+
+
+	public void setCardNumber(CreditCardNumber cardNumber) {
+		this.cardNumer = cardNumer;
+	}
 }
