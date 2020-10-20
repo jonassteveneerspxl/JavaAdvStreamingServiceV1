@@ -3,6 +3,7 @@ package be.pxl.ja.streamingservice.controller;
 import be.pxl.ja.streamingservice.model.Content;
 import be.pxl.ja.streamingservice.model.Movie;
 import be.pxl.ja.streamingservice.model.Playable;
+import be.pxl.ja.streamingservice.model.Profile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
