@@ -1,7 +1,6 @@
 package be.pxl.ja.streamingservice;
 
 import be.pxl.ja.streamingservice.exception.AccountNotFoundException;
-import be.pxl.ja.streamingservice.exception.InvalidPasswordException;
 import be.pxl.ja.streamingservice.model.Content;
 import be.pxl.ja.streamingservice.model.StreamingPlan;
 import be.pxl.ja.streamingservice.repository.ContentRepository;

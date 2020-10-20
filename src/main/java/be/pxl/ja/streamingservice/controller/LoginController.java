@@ -3,7 +3,6 @@ package be.pxl.ja.streamingservice.controller;
 import be.pxl.ja.streamingservice.StreamingService;
 import be.pxl.ja.streamingservice.StreamingServiceFactory;
 import be.pxl.ja.streamingservice.exception.AccountNotFoundException;
-import be.pxl.ja.streamingservice.exception.InvalidPasswordException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
